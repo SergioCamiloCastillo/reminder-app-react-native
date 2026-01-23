@@ -98,8 +98,8 @@ export async function scheduleReminderNotification(reminder: Reminder): Promise<
 
     const baseId = await Notifications.scheduleNotificationAsync({
       content: {
-        title: '⏰ Recordatorio',
-        body: reminder.title,
+        title: `⏰ ${reminder.title}`,
+        body: reminder.description || 'Recordatorio',
         data: { reminderId: reminder.id, type: 'onTime' },
         sound: true,
       },
@@ -128,8 +128,8 @@ export async function scheduleReminderNotification(reminder: Reminder): Promise<
       if (advanceTrigger > new Date()) {
         const advanceId = await Notifications.scheduleNotificationAsync({
           content: {
-            title: '🔔 Aviso anticipado',
-            body: reminder.title,
+            title: `🔔 Próximo: ${reminder.title}`,
+            body: reminder.description || 'Recordatorio próximo',
             data: { reminderId: reminder.id, type: 'advance' },
             sound: true,
           },

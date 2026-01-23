@@ -62,6 +62,13 @@ export function useCreateReminder() {
           if (calendarEventId) {
             await reminderRepository.update(newReminder.id, { calendarEventId });
           }
+        } else if (reminderData.alertType === 'both') {
+          const calendarEventId = await createCalendarAlarm(newReminder);
+          const notificationId = await scheduleReminderNotification(newReminder);
+          await reminderRepository.update(newReminder.id, { 
+            calendarEventId: calendarEventId || undefined, 
+            notificationId 
+          });
         } else {
           const notificationId = await scheduleReminderNotification(newReminder);
           await reminderRepository.update(newReminder.id, { notificationId });
@@ -107,6 +114,13 @@ export function useUpdateReminder() {
           if (calendarEventId) {
             await reminderRepository.update(updatedReminder.id, { calendarEventId, notificationId: undefined });
           }
+        } else if (updatedReminder.alertType === 'both') {
+          const calendarEventId = await createCalendarAlarm(updatedReminder);
+          const notificationId = await scheduleReminderNotification(updatedReminder);
+          await reminderRepository.update(updatedReminder.id, { 
+            calendarEventId: calendarEventId || undefined, 
+            notificationId 
+          });
         } else {
           const notificationId = await scheduleReminderNotification(updatedReminder);
           await reminderRepository.update(updatedReminder.id, { notificationId, calendarEventId: undefined });

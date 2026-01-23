@@ -86,7 +86,7 @@ export async function createCalendarAlarm(reminder: Reminder): Promise<string | 
 
       if (advanceMinutes > 0 && alarmDate.getTime() > Date.now()) {
         const advanceId = `${reminder.id}-advance`;
-        AlarmModule.scheduleAlarm(advanceId, alarmDate.getTime(), 'Aviso anticipado', reminder.title);
+        AlarmModule.scheduleAlarm(advanceId, alarmDate.getTime(), `Próximo: ${reminder.title}`, reminder.description || 'Recordatorio próximo');
         notificationIds.push(advanceId);
       }
       return notificationIds.join(',');

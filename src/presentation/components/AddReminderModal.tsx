@@ -37,7 +37,8 @@ interface AddReminderModalProps {
 
 const alertTypes: { key: AlertType; label: string; icon: keyof typeof Ionicons.glyphMap; description: string }[] = [
   { key: 'notification', label: 'Notificación', icon: 'notifications-outline', description: 'Notificación push silenciosa' },
-  { key: 'alarm', label: 'Alarma', icon: 'alarm-outline', description: 'Alarma en calendario con sonido' },
+  { key: 'alarm', label: 'Alarma', icon: 'alarm-outline', description: 'Alarma con sonido fuerte' },
+  { key: 'both', label: 'Ambos', icon: 'notifications', description: 'Notificación + Alarma' },
 ];
 
 const categories: { key: Category; label: string }[] = [
